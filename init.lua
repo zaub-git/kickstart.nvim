@@ -888,6 +888,7 @@ require('lazy').setup({
       require('gruvbox').setup {
         contrast = 'hard',
         terminal_colors = true,
+        transparent_mode = true,
         italic = {
           strings = false,
           emphasis = false,
