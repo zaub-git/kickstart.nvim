@@ -23,6 +23,9 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+
+    -- nvim-dap plugin for python
+    'mfussenegger/nvim-dap-python',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -95,6 +98,8 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        -- Adding the debugpy here so DAP can connect to Mason
+        'python',
       },
     }
 
@@ -144,5 +149,8 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+    -- Point nvim-dap-python to the debugpy path created by Mason
+    local path = vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python'
+    require('dap-python').setup(path)
   end,
 }
