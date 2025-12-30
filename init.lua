@@ -957,13 +957,13 @@ require('lazy').setup({
     branch = 'main',
     lazy = false,
     build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
+    main = 'nvim-treesitter.config', -- Sets main module to use for opts
     config = function(_, opts)
       -- 1. FORCE THE COMPILERS HERE
-      require('nvim-treesitter.install').compilers = { 'gcc', 'clang' }
+      require('nvim-treesitter.install').compilers = { 'clang', 'gcc' }
 
       -- 2. Call the setup function with your options
-      require('nvim-treesitter.configs').setup(opts)
+      require('nvim-treesitter.config').setup(opts)
     end,
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
@@ -1037,3 +1037,12 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+vim.keymap.set('n', '<F12>', function()
+  -- Use vim.o for a cleaner read/write that LSP understands
+  if vim.o.laststatus == 2 then
+    vim.o.laststatus = 0
+  else
+    vim.o.laststatus = 2
+  end
+end, { desc = 'Toggle Nvim status bar' })
